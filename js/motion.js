@@ -145,7 +145,36 @@
     });
   }
 
+  /* ---------- Neutralize <body>'s page-load animation once it's done ---------- */
+  // <body> has a page-load animation (`page-in` in styles.css) that lifts +
+  // fades the page in. Its animation-fill-mode:both keeps applying the
+  // animation's end-state to <body> after it finishes — and on some mobile
+  // browsers this still counts as <body> having a "transform", which turns
+  // it into a CSS containing block for any position:fixed descendant
+  // (the scroll-progress bar, the back-to-top button, the page-transition
+  // overlay). Those elements then get positioned relative to the whole
+  // document instead of the visible screen, so they scroll away instead of
+  // staying pinned. Explicitly clearing the animation after it plays once
+  // removes any ambiguity, on every browser, without touching how the
+  // intro animation itself looks.
+  function neutralizeBodyLoadAnimation() {
+    function clear() {
+      document.body.style.animation = 'none';
+      document.body.style.transform = 'none';
+    }
+    document.body.addEventListener('animationend', function handler(e) {
+      if (e.target !== document.body) return;
+      clear();
+      document.body.removeEventListener('animationend', handler);
+    });
+    // Fallback in case animationend never fires (e.g. some older mobile
+    // browsers under certain conditions) — the intro animation is .45s,
+    // so by 600ms it's always safe to clear.
+    setTimeout(clear, 600);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    neutralizeBodyLoadAnimation();
     autoTagReveal();
     initScrollReveal();
     initAnchorScroll();
