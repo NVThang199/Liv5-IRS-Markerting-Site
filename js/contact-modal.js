@@ -63,8 +63,16 @@
 
   function showModal() {
     console.log('[contact-modal.js] showModal() called');
+
+    // See lang-picker.js for why: neutralizes a lingering transform on
+    // <body> (from the page-load animation) that can break position:fixed
+    // centering for this modal.
+    document.documentElement.style.transform = 'none';
+    document.body.style.animation = 'none';
+    document.body.style.transform = 'none';
+
     var backdrop = buildModal();
-    document.body.appendChild(backdrop);
+    document.documentElement.appendChild(backdrop);
     document.body.style.overflow = 'hidden';
 
     // Match whichever language is currently active on the page.

@@ -79,8 +79,23 @@
   function showModal() {
     markAskedThisSession();
 
+    // Defensive fix: <body> has a page-load animation (`page-in`) whose
+    // fill-mode keeps applying its final transform value to <body> forever.
+    // Any non-"none" transform on an ancestor turns it into a CSS
+    // "containing block", which breaks position:fixed centering for this
+    // modal (it ends up positioned relative to the full page instead of
+    // the visible screen). Explicitly killing the animation + any leftover
+    // transform on <html>/<body> guarantees this can't happen, regardless
+    // of what CSS is actually deployed.
+    document.documentElement.style.transform = 'none';
+    document.body.style.animation = 'none';
+    document.body.style.transform = 'none';
+
     var backdrop = buildModal();
-    document.body.appendChild(backdrop);
+    // Attach to <html> rather than <body> as an extra safety net — even if
+    // something else on <body> re-introduces a transform later, this modal
+    // still won't be affected by it.
+    document.documentElement.appendChild(backdrop);
     document.body.style.overflow = 'hidden';
 
     // Make sure the modal's own text (e.g. the checkbox label) matches

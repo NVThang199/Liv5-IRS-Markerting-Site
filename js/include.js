@@ -42,7 +42,7 @@
     // Cache-busting query param: bump this (or generate it dynamically)
     // whenever partials/nav.html or partials/footer.html change, so
     // browsers/CDN don't keep serving a stale cached copy after a deploy.
-    var CACHE_BUST = 'v=20260808';
+    var CACHE_BUST = 'v=20260808v2';
     Promise.all([
       loadPartial('#nav-placeholder', 'partials/nav.html?' + CACHE_BUST),
       loadPartial('#footer-placeholder', 'partials/footer.html?' + CACHE_BUST)
