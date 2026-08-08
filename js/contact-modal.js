@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  console.log('[contact-modal.js] loaded and parsed');
 
   function buildModal() {
     var backdrop = document.createElement('div');
@@ -61,6 +62,7 @@
   }
 
   function showModal() {
+    console.log('[contact-modal.js] showModal() called');
     var backdrop = buildModal();
     document.body.appendChild(backdrop);
     document.body.style.overflow = 'hidden';
@@ -92,17 +94,30 @@
   }
 
   function initTriggers() {
-    document.querySelectorAll('[data-contact-trigger]').forEach(function (el) {
-      if (el.dataset.contactBound) return;
+    var found = document.querySelectorAll('[data-contact-trigger]');
+    console.log('[contact-modal.js] initTriggers() ran, found', found.length, 'element(s):', found);
+    found.forEach(function (el) {
+      if (el.dataset.contactBound) {
+        console.log('[contact-modal.js] element already bound, skipping', el);
+        return;
+      }
       el.dataset.contactBound = '1';
+      console.log('[contact-modal.js] binding click listener to', el);
       el.addEventListener('click', function (e) {
+        console.log('[contact-modal.js] click event fired on trigger element');
         e.preventDefault();
         showModal();
       });
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initTriggers);
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('[contact-modal.js] DOMContentLoaded fired, running initTriggers');
+    initTriggers();
+  });
   // Nav/footer are injected asynchronously — re-scan once they land.
-  window.addEventListener('partials:loaded', initTriggers);
+  window.addEventListener('partials:loaded', function () {
+    console.log('[contact-modal.js] partials:loaded event received, re-running initTriggers');
+    initTriggers();
+  });
 })();

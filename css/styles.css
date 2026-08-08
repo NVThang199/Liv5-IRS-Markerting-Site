@@ -1,4 +1,4 @@
-  :root{
+:root{
     /* ===== Color tokens — dark navy theme inspired by Liv5-IRS app ===== */
     --bg: #090C14;
     --bg-elevated: #0D1220;
@@ -892,3 +892,112 @@
     .lang-modal{ transform:none !important; }
   }
 
+  /* ============ CONTACT MODAL ============ */
+  .contact-modal-backdrop{
+    position:fixed; inset:0; z-index:300;
+    background:rgba(5,7,13,0.72);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    padding:var(--space-3);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .28s var(--ease);
+  }
+  .contact-modal-backdrop.is-open{ opacity:1; pointer-events:auto; }
+  .contact-modal{
+    position:relative;
+    width:100%; max-width:420px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:var(--space-4);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+    transform:translateY(14px) scale(.98);
+    transition:transform .28s var(--ease);
+  }
+  .contact-modal-backdrop.is-open .contact-modal{ transform:translateY(0) scale(1); }
+  .contact-modal-close{
+    position:absolute; top:14px; right:14px;
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted);
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--border);
+    transition:color .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
+  }
+  .contact-modal-close:hover{ color:var(--text); background:rgba(255,255,255,0.08); border-color:var(--border-strong); }
+  .contact-modal-close svg{ width:16px; height:16px; }
+  .contact-modal-eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--primary);
+    margin-bottom:10px;
+  }
+  .contact-modal h3{
+    font-family:var(--font-head);
+    font-size:24px; font-weight:700;
+    letter-spacing:-.2px;
+    margin-bottom:8px;
+    color:var(--text);
+    padding-right:30px;
+  }
+  .contact-modal > p{
+    color:var(--text-muted);
+    font-size:14px; line-height:1.6;
+    margin-bottom:var(--space-3);
+  }
+  .contact-modal-card{
+    display:flex; align-items:center; gap:12px;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    background:var(--surface-2);
+    margin-bottom:var(--space-3);
+  }
+  .contact-modal-avatar{
+    flex:none;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--primary-tint);
+    color:var(--primary-hover);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-head); font-weight:700; font-size:15px;
+  }
+  .contact-modal-name{ font-size:14.5px; font-weight:600; color:var(--text); }
+  .contact-modal-role{ font-size:12.5px; color:var(--text-muted); margin-top:2px; }
+  .contact-modal-list{ display:flex; flex-direction:column; gap:14px; }
+  .contact-modal-list li{
+    display:flex; align-items:flex-start; gap:12px;
+  }
+  .contact-modal-list li svg{
+    flex:none; width:18px; height:18px; margin-top:2px;
+    color:var(--primary);
+  }
+  .contact-modal-label{
+    font-family:var(--font-mono); font-size:10.5px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:2px;
+  }
+  .contact-modal-list li a,
+  .contact-modal-list li span{
+    font-size:14.5px; color:var(--text);
+  }
+  .contact-modal-list li a:hover{ color:var(--primary); }
+
+  /* Staggered fade-in for modal content once opened */
+  .contact-modal-stagger{
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .32s var(--ease), transform .32s var(--ease);
+    transition-delay:calc(var(--stagger-i, 0) * 0.045s);
+  }
+  .contact-modal-backdrop.is-revealed .contact-modal-stagger{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .contact-modal-backdrop, .contact-modal, .contact-modal-stagger{ transition:none !important; }
+    .contact-modal{ transform:none !important; }
+    .contact-modal-stagger{ opacity:1 !important; transform:none !important; }
+  }
