@@ -39,9 +39,13 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     console.log('[include.js] DOMContentLoaded, starting partial loads');
+    // Cache-busting query param: bump this (or generate it dynamically)
+    // whenever partials/nav.html or partials/footer.html change, so
+    // browsers/CDN don't keep serving a stale cached copy after a deploy.
+    var CACHE_BUST = 'v=20260808';
     Promise.all([
-      loadPartial('#nav-placeholder', 'partials/nav.html'),
-      loadPartial('#footer-placeholder', 'partials/footer.html')
+      loadPartial('#nav-placeholder', 'partials/nav.html?' + CACHE_BUST),
+      loadPartial('#footer-placeholder', 'partials/footer.html?' + CACHE_BUST)
     ]).then(function () {
       console.log('[include.js] both partials settled, dispatching partials:loaded');
       markActiveNavLink();
