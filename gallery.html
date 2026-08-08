@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Album ảnh/Video — Liv5 Solutions</title>
+<meta name="description" content="Hình ảnh và video Liv5-IRS tại các giải bóng rổ đã triển khai: NYCC, và các giải đấu khác.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=20260808v8">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+<!-- ============ GALLERY HEADER ============ -->
+  <header class="hero" style="padding:var(--space-6) 0 var(--space-5);">
+    <div class="wrap">
+      <div class="eyebrow" data-vi="Album ảnh/Video" data-en="Gallery">Album ảnh/Video</div>
+      <h1 style="font-size:clamp(34px,4.6vw,58px); line-height:1.03; max-width:760px;">
+        <span data-vi="Liv5-IRS" data-en="Liv5-IRS">Liv5-IRS</span><br>
+        <span class="accent" data-vi="trên sân đấu thật" data-en="on real courts">trên sân đấu thật</span>
+      </h1>
+      <p class="lead" style="max-width:600px; margin-top:var(--space-3);" data-vi="Hình ảnh và video ghi lại quá trình Liv5-IRS vận hành tại các giải bóng rổ đã triển khai." data-en="Photos and videos capturing Liv5-IRS in action at the tournaments where it has been deployed.">Hình ảnh và video ghi lại quá trình Liv5-IRS vận hành tại các giải bóng rổ đã triển khai.</p>
+    </div>
+  </header>
+
+
+<!-- ============ FILTERS + GRID ============ -->
+  <section style="padding:0 0 var(--space-7);">
+    <div class="wrap">
+
+      <div class="gallery-filters" id="gallery-filters">
+        <button type="button" class="gallery-filter-btn is-active" data-filter="all" data-vi="Tất cả" data-en="All">Tất cả</button>
+        <button type="button" class="gallery-filter-btn" data-filter="brmb" data-vi="BRMB" data-en="BRMB">BRMB</button>
+        <button type="button" class="gallery-filter-btn" data-filter="nycc3x3" data-vi="NYCC 3x3" data-en="NYCC 3x3">NYCC 3x3</button>
+        <button type="button" class="gallery-filter-btn" data-filter="video" data-vi="Video" data-en="Video">Video</button>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid" data-reveal-group>
+
+        <div class="gallery-item" data-tag="brmb">
+          <div class="ph ph-filled">
+            <img src="assets/brmb-monitor-4cam.jpg" alt="Giao diện Liv5-IRS 4 camera tại giải BRMB" class="ph-img" loading="lazy">
+          </div>
+          <div class="gallery-item-tag">BRMB</div>
+          <div class="gallery-item-caption" data-vi="Giao diện Liv5-IRS tại giải BRMB" data-en="Liv5-IRS interface at the BRMB tournament">Giao diện Liv5-IRS tại giải BRMB</div>
+        </div>
+
+        <div class="gallery-item" data-tag="brmb">
+          <div class="ph ph-filled">
+            <img src="assets/brmb-broadcast-review.jpg" alt="Đội ngũ vận hành trọng tài xem lại tình huống tại giải BRMB" class="ph-img" loading="lazy">
+          </div>
+          <div class="gallery-item-tag">BRMB</div>
+          <div class="gallery-item-caption" data-vi="Đội ngũ vận hành trọng tài xem lại tình huống" data-en="The referee crew reviewing a play">Đội ngũ vận hành trọng tài xem lại tình huống</div>
+        </div>
+
+        <div class="gallery-item" data-tag="video brmb">
+          <div class="ph ph-filled">
+            <video class="ph-img" controls preload="none" poster="assets/brmb-monitor-4cam.jpg" playsinline>
+              <source src="assets/videobrmb.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="gallery-item-tag video">BRMB</div>
+          <div class="gallery-item-caption" data-vi="Clip Instant Replay được sử dụng trong trận đấu" data-en="Instant Replay clip used during a match">Clip Instant Replay được sử dụng trong trận đấu</div>
+        </div>
+
+        <div class="gallery-item" data-tag="nycc3x3">
+          <div class="ph ph-filled">
+            <img src="assets/nycc3x3-crowd-review.jpg" alt="Buổi trình diễn Liv5-IRS tại giải NYCC 3x3" class="ph-img" loading="lazy">
+          </div>
+          <div class="gallery-item-tag">NYCC 3x3</div>
+          <div class="gallery-item-caption" data-vi="Buổi trình diễn Liv5-IRS tại giải NYCC 3x3" data-en="Liv5-IRS demo session at the NYCC 3x3 tournament">Buổi trình diễn Liv5-IRS tại giải NYCC 3x3</div>
+        </div>
+
+        <div class="gallery-item" data-tag="video nycc3x3">
+          <div class="ph ph-filled">
+            <video class="ph-img" controls preload="none" poster="assets/nycc3x3-dual-monitor.jpg" playsinline>
+              <source src="assets/videonycc3x3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="gallery-item-tag video">NYCC 3x3</div>
+          <div class="gallery-item-caption" data-vi="Trọng tài thao tác Liv5-IRS ngay tại sân" data-en="A referee operating Liv5-IRS courtside">Trọng tài thao tác Liv5-IRS ngay tại sân</div>
+        </div>
+
+      </div>
+
+      <p class="gallery-empty-note" id="gallery-empty-note" style="display:none;" data-vi="Chưa có mục nào thuộc bộ lọc này." data-en="No items match this filter yet.">Chưa có mục nào thuộc bộ lọc này.</p>
+
+      <p style="text-align:center; font-size:13px; color:var(--text-faint); margin-top:var(--space-4);" data-vi="Album sẽ tiếp tục được bổ sung khi đội ngũ có thêm tư liệu từ các giải đấu." data-en="The gallery will keep growing as the team gathers more material from tournaments.">Album sẽ tiếp tục được bổ sung khi đội ngũ có thêm tư liệu từ các giải đấu.</p>
+
+    </div>
+  </section>
+
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/lang.js?v=20260808v8"></script>
+  <script src="js/contact-modal.js?v=20260808v8"></script>
+  <script src="js/nav-toggle.js?v=20260808v8"></script>
+  <script src="js/include.js?v=20260808v8"></script>
+  <script src="js/motion.js?v=20260808v8"></script>
+  <script src="js/effects.js?v=20260808v8"></script>
+  <script src="js/gallery-filter.js?v=20260808v8"></script>
+</body>
+</html>

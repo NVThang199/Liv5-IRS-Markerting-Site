@@ -141,7 +141,7 @@
       overlay.classList.add('active');
       setTimeout(function () {
         window.location.href = href;
-      }, 280);
+      }, 200);
     });
   }
 
