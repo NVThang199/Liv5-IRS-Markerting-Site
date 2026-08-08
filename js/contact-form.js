@@ -3,7 +3,7 @@
 
   // Link Web App sau khi deploy Google Apps Script (xem hướng dẫn deploy đi kèm).
   // Dạng: 'https://script.google.com/macros/s/XXXXXXXXXXXXXXXXXXXXXXXX/exec'
-  var ENDPOINT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_REAL_DEPLOYMENT_ID/exec';
+  var ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzWzDEO5903sUarAUeH8Yw2LSvnWMAEpfLmOg47BCDX-4_2Cz0mkVnFs7IWHwi_Y4wwnQ/exec';
 
   var MSG = {
     sending:   { vi: 'Đang gửi…',                                   en: 'Sending…' },
