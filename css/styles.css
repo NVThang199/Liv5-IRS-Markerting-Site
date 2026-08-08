@@ -43,7 +43,22 @@
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
   body{
-    background:var(--bg);
+    /* ============ AMBIENT PAGE BACKGROUND (áp dụng cho mọi trang) ============
+       Nền phẳng 1 màu (var(--bg)) trước đây được thay bằng nhiều lớp
+       background xếp chồng, neo theo khung nhìn (background-attachment:
+       fixed) thay vì cuộn theo nội dung: 3 vùng glow màu thương hiệu
+       (xanh/tím, cùng tông với glow-blob đang dùng ở hero) + 1 lớp lưới
+       kẻ mảnh kiểu "tech grid". Sửa 1 lần ở đây vì mọi trang đều dùng
+       chung file styles.css này. */
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(680px 480px at 14% -8%, rgba(47,111,237,0.16), transparent 62%),
+      radial-gradient(620px 460px at 88% 6%, rgba(139,92,246,0.13), transparent 60%),
+      radial-gradient(760px 560px at 50% 100%, rgba(47,111,237,0.09), transparent 60%),
+      url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%3E%3Cpath%20d%3D%22M0%200H64M0%200V64%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke-width%3D%221%22/%3E%3C/svg%3E");
+    background-repeat:no-repeat, no-repeat, no-repeat, repeat;
+    background-size:auto, auto, auto, 64px 64px;
+    background-attachment:fixed, fixed, fixed, fixed;
     color:var(--text);
     font-family:var(--font-body);
     font-size:16px;
@@ -290,6 +305,22 @@
   }
   .glow-blue{ width:340px; height:340px; background:var(--primary); top:-60px; right:-60px; }
   .glow-purple{ width:260px; height:260px; background:var(--purple); bottom:-40px; left:-40px; }
+
+  /* Quả bóng rổ 3D — hình minh hoạ chính của hero, xoay liên tục để tạo
+     điểm nhấn chủ đề (bóng rổ). */
+  .hero-ball{
+    position:relative;
+    width:min(420px, 78%);
+    aspect-ratio:1/1;
+    margin:0 auto;
+    pointer-events:none;
+    filter:drop-shadow(0 28px 44px rgba(0,0,0,0.5));
+  }
+  .hero-ball-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; }
+  .hero-ball-static{ display:none; }
+  @media (max-width:560px){
+    .hero-ball{ width:min(260px, 62%); }
+  }
 
   .float-chip{
     position:absolute;
@@ -715,6 +746,60 @@
   }
   .validation-facts h4{ font-family:var(--font-body); font-size:16px; font-weight:600; color:var(--text); margin-bottom:6px; }
   .validation-facts p{ font-size:14px; color:var(--text-muted); line-height:1.6; }
+
+  /* ============ PARTNERS MARQUEE (logo strip, drag-to-scroll) ============ */
+  .partners-marquee{ padding:0 0 var(--space-6); }
+  .partners-marquee-label{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-mono); font-size:11.5px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint);
+    margin-bottom:var(--space-3);
+  }
+  .partners-marquee-label::after{ content:''; flex:1; height:1px; background:var(--border); }
+  .partners-marquee-viewport{
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
+    -webkit-user-select:none; user-select:none;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  /* Khi track không cuộn (ít đối tác, vừa khung nhìn), viewport sẽ tự
+     căn giữa track nhờ justify-content:center ở trên. Khi marquee.js kích
+     hoạt cuộn (đủ đối tác để lấp đầy + tràn khung nhìn), class này được gắn
+     để track thoát khỏi flex-centering và chạy bằng transform như cũ. */
+  .partners-marquee-viewport.is-scrolling{ justify-content:flex-start; cursor:grab; }
+  .partners-marquee-viewport.is-scrolling.is-dragging{ cursor:grabbing; }
+  .partners-marquee-track{
+    display:flex; align-items:center; justify-content:center; gap:var(--space-4);
+    width:max-content;
+    will-change:transform;
+    padding:4px 0;
+  }
+  .partners-marquee-item{
+    width:96px; height:96px; flex:none;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#F5F7FB;
+    box-shadow:0 10px 24px -12px rgba(0,0,0,0.5);
+    padding:14px;
+    pointer-events:none;
+  }
+  .partners-marquee-item img{ width:100%; height:100%; object-fit:contain; display:block; -webkit-user-drag:none; }
+  .partners-marquee-item.is-empty{
+    background:transparent;
+    border:1.5px dashed var(--border-strong);
+    box-shadow:none;
+  }
+  /* Bản sao (set B, aria-hidden) chỉ cần hiện khi marquee thực sự cuộn
+     (đủ đối tác tràn khung nhìn) — nếu không, ẩn đi để hàng đối tác không
+     bị lặp đôi khi đang đứng yên và căn giữa. */
+  .partners-marquee-item[aria-hidden="true"]{ display:none; }
+  .partners-marquee-viewport.is-scrolling .partners-marquee-item[aria-hidden="true"]{ display:flex; }
+  @media (max-width:640px){
+    .partners-marquee-item{ width:72px; height:72px; }
+    .partners-marquee-track{ gap:var(--space-3); }
+  }
 
   /* ============ PARTNERS ============ */
   .partners{ padding:var(--space-6) 0; border-top:1px solid var(--border); }

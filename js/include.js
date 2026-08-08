@@ -2,11 +2,22 @@
   'use strict';
 
   function markActiveNavLink() {
-    var current = window.location.pathname.split('/').pop() || 'index.html';
+    // vercel.json has "cleanUrls": true, so on the live site the URL for
+    // customers.html is just /customers (no .html). Normalize both sides
+    // (strip a leading slash, trailing slash, and .html) before comparing,
+    // so this works the same locally (file served as *.html) and on Vercel.
+    function normalize(path) {
+      path = path.split('#')[0].split('?')[0];
+      path = path.replace(/^\/+|\/+$/g, ''); // trim leading/trailing slashes
+      path = path.replace(/\.html$/, '');
+      return path === '' ? 'index' : path;
+    }
+
+    var current = normalize(window.location.pathname);
     var links = document.querySelectorAll('.nav-links a');
     links.forEach(function (a) {
       var href = a.getAttribute('href');
-      if (href === current) {
+      if (normalize(href) === current) {
         a.classList.add('active');
       } else {
         a.classList.remove('active');
