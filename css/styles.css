@@ -255,7 +255,7 @@
   }
   .overview-legend{
     margin-top:var(--space-3);
-    display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-2);
+    display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-2);
   }
   .overview-legend-item{
     display:flex; gap:12px; align-items:flex-start;
