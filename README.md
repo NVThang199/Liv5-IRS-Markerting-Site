@@ -5,13 +5,13 @@
 ```
 liv5-site/
 ├── index.html          Trang chủ (Hero, Stats, CTA)
-├── bai-toan.html        Bài toán thị trường
-├── tong-quan.html        Tổng quan sản phẩm
-├── tinh-nang.html        Tính năng
-├── khach-hang.html       Khách hàng mục tiêu + So sánh
-├── thuc-te.html          Thực tế triển khai + Đối tác
-├── doi-ngu.html          Đội ngũ
-├── lo-trinh.html         Lộ trình
+├── problem.html          Bài toán thị trường
+├── overview.html         Tổng quan sản phẩm
+├── features.html         Tính năng
+├── customers.html        Khách hàng mục tiêu + So sánh
+├── deployment.html       Thực tế triển khai + Đối tác
+├── team.html             Đội ngũ
+├── roadmap.html          Lộ trình
 ├── css/
 │   └── styles.css        Toàn bộ CSS, dùng chung cho mọi trang
 ├── js/
