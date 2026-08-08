@@ -241,7 +241,7 @@
 
   /* ============ PRODUCT OVERVIEW (single real screenshot, annotated) ============ */
   .overview-shot{ position:relative; margin-top:var(--space-4); }
-  .overview-img-wrap{ aspect-ratio:256/179; }
+  .overview-img-wrap{ aspect-ratio:16/9; }
   .overview-pin{
     position:absolute;
     width:28px; height:28px; border-radius:50%;
@@ -279,7 +279,7 @@
   }
 
   .hero-visual{ position:relative; }
-  .hero-visual .ph{ aspect-ratio:256/179; }
+  .hero-visual .ph{ aspect-ratio:16/9; }
   .glow-blob{
     position:absolute; border-radius:50%; filter:blur(70px); z-index:-1; opacity:.55;
   }
