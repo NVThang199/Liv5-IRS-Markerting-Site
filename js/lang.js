@@ -16,6 +16,12 @@
       if (html !== null) el.innerHTML = html;
     });
 
+    var translatablePlaceholder = document.querySelectorAll('[data-vi-placeholder][data-en-placeholder]');
+    translatablePlaceholder.forEach(function (el) {
+      var ph = lang === 'en' ? el.getAttribute('data-en-placeholder') : el.getAttribute('data-vi-placeholder');
+      if (ph !== null) el.setAttribute('placeholder', ph);
+    });
+
     var langButtons = document.querySelectorAll('.lang');
     langButtons.forEach(function (btn) {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);

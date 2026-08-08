@@ -7,7 +7,7 @@
 <meta name="description" content="Liên hệ với đội ngũ Liv5 Solutions để trao đổi về triển khai Liv5-IRS cho giải đấu bóng rổ của bạn. Email, số điện thoại và địa chỉ FPT University, Hòa Lạc, Hà Nội.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20260808v7">
+<link rel="stylesheet" href="css/styles.css?v=20260808v9">
 </head>
 <body>
 
@@ -88,26 +88,55 @@
           </div>
         </div>
 
-        <!-- ===== RIGHT: CTA sang Google Form ===== -->
+        <!-- ===== RIGHT: form điền trực tiếp ===== -->
         <div class="contact-form-card" data-reveal>
           <h3 style="margin-bottom:6px;" data-vi="Gửi yêu cầu tư vấn" data-en="Send us a message">Gửi yêu cầu tư vấn</h3>
-          <p style="font-size:14px; color:var(--text-muted); margin-bottom:var(--space-4);" data-vi="Điền biểu mẫu Google Form — chúng tôi sẽ phản hồi trong vòng 1–2 ngày làm việc." data-en="Fill in the Google Form — we'll get back to you within 1–2 business days.">Điền biểu mẫu Google Form — chúng tôi sẽ phản hồi trong vòng 1–2 ngày làm việc.</p>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:var(--space-4);" data-vi="Điền thông tin bên dưới — chúng tôi sẽ phản hồi trong vòng 1–2 ngày làm việc." data-en="Fill in the form below — we'll get back to you within 1–2 business days.">Điền thông tin bên dưới — chúng tôi sẽ phản hồi trong vòng 1–2 ngày làm việc.</p>
 
-          <div class="contact-gform-panel">
-            <div class="contact-gform-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+          <form id="cf-form" novalidate>
+            <div class="form-field" id="cf-field-name">
+              <label class="form-label" for="cf-name" data-vi="Họ và tên" data-en="Full name">Họ và tên<span class="req">*</span></label>
+              <input class="form-input" type="text" id="cf-name" name="name" autocomplete="name" data-vi-placeholder="Nguyễn Văn A" data-en-placeholder="John Smith" placeholder="Nguyễn Văn A">
+              <div class="form-error-msg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+                <span data-vi="Vui lòng nhập họ và tên." data-en="Please enter your name.">Vui lòng nhập họ và tên.</span>
+              </div>
             </div>
-            <div class="contact-gform-title" data-vi="Biểu mẫu liên hệ (Google Form)" data-en="Contact form (Google Form)">Biểu mẫu liên hệ (Google Form)</div>
-            <p class="contact-gform-desc" data-vi="Chúng tôi thu thập thông tin liên hệ qua Google Form để dễ theo dõi và phản hồi nhanh hơn." data-en="We collect contact requests through a Google Form to track and respond faster.">Chúng tôi thu thập thông tin liên hệ qua Google Form để dễ theo dõi và phản hồi nhanh hơn.</p>
 
-            <button type="button" class="btn btn-primary btn-block" id="cf-submit">
-              <span class="form-spinner" aria-hidden="true"></span>
-              <span class="btn-label" data-vi="Mở biểu mẫu liên hệ →" data-en="Open contact form →">Mở biểu mẫu liên hệ →</span>
-            </button>
-            <div class="form-status" id="cf-status" role="status" aria-live="polite" style="justify-content:center; margin-top:10px;"></div>
-          </div>
+            <div class="contact-form-grid">
+              <div class="form-field" id="cf-field-email">
+                <label class="form-label" for="cf-email" data-vi="Email" data-en="Email">Email<span class="req">*</span></label>
+                <input class="form-input" type="email" id="cf-email" name="email" autocomplete="email" placeholder="ban@email.com">
+                <div class="form-error-msg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+                  <span data-vi="Vui lòng nhập email hợp lệ." data-en="Please enter a valid email.">Vui lòng nhập email hợp lệ.</span>
+                </div>
+              </div>
+              <div class="form-field" id="cf-field-phone">
+                <label class="form-label" for="cf-phone" data-vi="Số điện thoại" data-en="Phone number">Số điện thoại <span class="form-hint" data-vi="(không bắt buộc)" data-en="(optional)">(không bắt buộc)</span></label>
+                <input class="form-input" type="tel" id="cf-phone" name="phone" autocomplete="tel" placeholder="09xx xxx xxx">
+              </div>
+            </div>
 
-          <p style="font-size:12px; color:var(--text-faint); margin-top:var(--space-3);" data-vi="Biểu mẫu sẽ mở ở tab mới. Link hiện đang là placeholder — sẽ được cập nhật khi Google Form chính thức được tạo." data-en="The form opens in a new tab. This link is currently a placeholder — it will be updated once the Google Form is created.">Biểu mẫu sẽ mở ở tab mới. Link hiện đang là placeholder — sẽ được cập nhật khi Google Form chính thức được tạo.</p>
+            <div class="form-field full" id="cf-field-message">
+              <label class="form-label" for="cf-message" data-vi="Lời nhắn" data-en="Message">Lời nhắn<span class="req">*</span></label>
+              <textarea class="form-textarea" id="cf-message" name="message" data-vi-placeholder="Cho chúng tôi biết về giải đấu của bạn — quy mô, thời gian, địa điểm..." data-en-placeholder="Tell us about your tournament — scale, timing, venue..." placeholder="Cho chúng tôi biết về giải đấu của bạn — quy mô, thời gian, địa điểm..."></textarea>
+              <div class="form-error-msg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+                <span data-vi="Vui lòng nhập lời nhắn." data-en="Please enter a message.">Vui lòng nhập lời nhắn.</span>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-primary" id="cf-submit">
+                <span class="form-spinner" aria-hidden="true"></span>
+                <span class="btn-label" data-vi="Gửi yêu cầu" data-en="Send message">Gửi yêu cầu</span>
+              </button>
+              <div class="form-status" id="cf-status" role="status" aria-live="polite"></div>
+            </div>
+          </form>
+
+          <p style="font-size:12px; color:var(--text-faint); margin-top:var(--space-3);" data-vi="Thông tin bạn gửi chỉ được đội ngũ Liv5 Solutions sử dụng để liên hệ tư vấn, không chia sẻ cho bên thứ ba." data-en="Information you submit is only used by the Liv5 Solutions team to follow up, and is never shared with third parties.">Thông tin bạn gửi chỉ được đội ngũ Liv5 Solutions sử dụng để liên hệ tư vấn, không chia sẻ cho bên thứ ba.</p>
         </div>
 
       </div>
@@ -117,12 +146,12 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="js/lang.js?v=20260808v7"></script>
-  <script src="js/contact-modal.js?v=20260808v7"></script>
-  <script src="js/nav-toggle.js?v=20260808v7"></script>
-  <script src="js/include.js?v=20260808v7"></script>
-  <script src="js/motion.js?v=20260808v7"></script>
-  <script src="js/effects.js?v=20260808v7"></script>
-  <script src="js/contact-form.js?v=20260808v7"></script>
+  <script src="js/lang.js?v=20260808v9"></script>
+  <script src="js/contact-modal.js?v=20260808v9"></script>
+  <script src="js/nav-toggle.js?v=20260808v9"></script>
+  <script src="js/include.js?v=20260808v9"></script>
+  <script src="js/motion.js?v=20260808v9"></script>
+  <script src="js/effects.js?v=20260808v9"></script>
+  <script src="js/contact-form.js?v=20260808v9"></script>
 </body>
 </html>
