@@ -199,7 +199,6 @@
     display:flex; align-items:center; justify-content:center;
   }
   .trust-logo img{ max-height:30px; max-width:100px; width:auto; height:auto; object-fit:contain; display:block; }
-  .trust-logo a{ display:flex; align-items:center; justify-content:center; }
 
   /* placeholder image block — reused everywhere images will later be inserted */
   .ph{
@@ -525,6 +524,14 @@
     display:grid; grid-template-columns:0.9fr 1.1fr;
     gap:var(--space-6); align-items:center;
   }
+  .validation-grid.reverse{ grid-template-columns:1.1fr 0.9fr; }
+  .validation-grid.reverse .validation-visual{ order:2; }
+  .validation-grid.reverse .validation-copy{ order:1; }
+  .validation-grid + .validation-grid{
+    margin-top:var(--space-6);
+    padding-top:var(--space-6);
+    border-top:1px solid var(--border);
+  }
   .validation-visual{ position:relative; }
   .validation-visual-sub{
     position:absolute; width:52%; aspect-ratio:4/3;
@@ -569,7 +576,6 @@
     box-shadow:0 10px 24px -12px rgba(0,0,0,0.5);
   }
   .partner-logo img{ width:100%; height:100%; object-fit:contain; display:block; }
-  .partner-logo a{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
   .partner-card p{ font-size:13.5px; color:var(--text-muted); line-height:1.6; }
 
   /* ============ ROADMAP ============ */
@@ -680,7 +686,8 @@
     .float-chip{ display:none; }
     .problem-grid{ grid-template-columns:1fr; }
     .segment-grid{ grid-template-columns:1fr; }
-    .validation-grid{ grid-template-columns:1fr; }
+    .validation-grid, .validation-grid.reverse{ grid-template-columns:1fr; }
+    .validation-grid.reverse .validation-visual, .validation-grid.reverse .validation-copy{ order:initial; }
     .validation-visual{ margin-bottom:var(--space-4); }
     .partners-grid{ grid-template-columns:1fr; }
     .roadmap-track{ grid-template-columns:1fr 1fr; row-gap:var(--space-4); }
@@ -872,144 +879,3 @@
     .lang-modal{ transform:none !important; }
   }
 
-
-  /* ============ CONTACT MODAL ============ */
-  .contact-modal-backdrop{
-    position:fixed; inset:0; z-index:300;
-    background:rgba(5,7,13,0.72);
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-    display:flex; align-items:center; justify-content:center;
-    padding:var(--space-3);
-    opacity:0;
-    transition:opacity .32s var(--ease);
-  }
-  .contact-modal-backdrop.is-open{ opacity:1; }
-  .contact-modal{
-    position:relative;
-    width:100%; max-width:420px;
-    max-height:88vh;
-    overflow-y:auto;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:var(--space-4);
-    text-align:center;
-    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
-    transform:translateY(28px) scale(.94);
-    transition:transform .38s cubic-bezier(.22,1,.36,1);
-  }
-  .contact-modal-backdrop.is-open .contact-modal{
-    transform:translateY(0) scale(1);
-  }
-  .contact-modal-close{
-    position:absolute; top:14px; right:14px;
-    width:32px; height:32px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:50%;
-    border:1px solid var(--border);
-    background:var(--surface-2);
-    color:var(--text-muted);
-    cursor:pointer;
-    transition:color .18s var(--ease), border-color .18s var(--ease), transform .18s var(--ease), background .18s var(--ease);
-  }
-  .contact-modal-close svg{ width:16px; height:16px; }
-  .contact-modal-close:hover{
-    color:var(--text);
-    border-color:var(--primary);
-    background:var(--primary-tint);
-    transform:rotate(90deg);
-  }
-
-  /* Staggered reveal for content inside the card — each item fades and
-     lifts in slightly after the backdrop/card animation, one after another. */
-  .contact-modal-stagger{
-    opacity:0;
-    transform:translateY(10px);
-    transition:opacity .45s var(--ease), transform .45s var(--ease);
-    transition-delay:calc(var(--stagger-i, 0) * 0.055s);
-  }
-  .contact-modal-backdrop.is-revealed .contact-modal-stagger{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-  .contact-modal-eyebrow{
-    display:flex; align-items:center; justify-content:center;
-    gap:8px;
-    font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
-    color:var(--primary);
-    margin-bottom:8px;
-  }
-  .contact-modal h3{
-    font-family:var(--font-head);
-    font-size:22px; font-weight:600;
-    letter-spacing:.2px;
-    margin-bottom:6px;
-  }
-  .contact-modal > p{
-    color:var(--text-muted);
-    font-size:14px;
-    margin-bottom:var(--space-3);
-  }
-  .contact-modal-card{
-    display:flex; align-items:center; gap:12px;
-    padding:14px;
-    border-radius:var(--radius-sm);
-    border:1px solid var(--border);
-    background:var(--surface-2);
-    margin-bottom:var(--space-3);
-    text-align:left;
-    transition:opacity .45s var(--ease), transform .45s var(--ease), border-color .2s var(--ease);
-  }
-  .contact-modal-card:hover{ border-color:var(--primary); }
-  .contact-modal-avatar{
-    flex:none;
-    width:44px; height:44px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    background:var(--primary-tint);
-    color:var(--primary);
-    font-family:var(--font-head);
-    font-weight:600; font-size:15px;
-  }
-  .contact-modal-name{ font-weight:600; font-size:15px; }
-  .contact-modal-role{ font-size:13px; color:var(--text-muted); margin-top:2px; }
-  .contact-modal-list{
-    display:flex; flex-direction:column; gap:12px;
-    text-align:left;
-  }
-  .contact-modal-list li{
-    display:flex; align-items:flex-start; gap:12px;
-    padding:10px 12px;
-    border-radius:var(--radius-sm);
-    border:1px solid var(--border);
-    background:var(--surface-2);
-    transition:border-color .2s var(--ease), transform .2s var(--ease), background .2s var(--ease);
-  }
-  .contact-modal-list li:hover{
-    border-color:var(--primary);
-    background:var(--primary-tint);
-    transform:translateX(2px);
-  }
-  .contact-modal-list svg{
-    flex:none;
-    width:18px; height:18px;
-    margin-top:2px;
-    color:var(--primary);
-  }
-  .contact-modal-label{ font-size:12px; color:var(--text-faint); margin-bottom:2px; }
-  .contact-modal-list a,
-  .contact-modal-list span{
-    font-size:14px; color:var(--text);
-  }
-  .contact-modal-list a{ transition:color .18s var(--ease); }
-  .contact-modal-list a:hover{ color:var(--primary); }
-
-  @media (prefers-reduced-motion: reduce){
-    .contact-modal-backdrop, .contact-modal, .contact-modal-stagger, .contact-modal-close{
-      transition:none !important;
-    }
-    .contact-modal{ transform:none !important; }
-    .contact-modal-stagger{ opacity:1 !important; transform:none !important; }
-  }
