@@ -763,14 +763,10 @@
   }
   @keyframes page-in{
     from{ opacity:0; transform:translateY(14px); }
-    /* Intentionally "none" rather than translateY(0): animation-fill-mode:both
-       keeps whatever transform value is set here applied to <body> forever
-       after the animation ends. Any non-"none" transform on an ancestor
-       creates a new containing block for position:fixed children, which
-       breaks the full-screen centering of .lang-modal-backdrop and
-       .contact-modal-backdrop (they get positioned relative to <body>'s
-       box instead of the viewport, so they drift off-screen once the page
-       is scrolled). "none" is visually identical here but avoids that. */
+    /* "none" rather than translateY(0): animation-fill-mode:both keeps
+       whatever transform value is set here applied to <body> forever after
+       the animation ends, and any non-"none" transform on an ancestor
+       creates a new containing block for position:fixed children. */
     to{ opacity:1; transform:none; }
   }
 
@@ -865,6 +861,12 @@
     padding:var(--space-3);
     opacity:0;
     transition:opacity .28s var(--ease);
+    /* This modal is attached to <html> (not <body>) to avoid a
+       position:fixed containing-block bug, so it no longer inherits
+       font/color from body{} — set them explicitly here instead. */
+    font-family:var(--font-body);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
   }
   .lang-modal-backdrop.is-open{ opacity:1; }
   .lang-modal{
@@ -911,8 +913,9 @@
     transform:translateY(-1px);
   }
   .lang-modal-btn.is-selected{
-    border-color:var(--primary);
-    background:var(--primary-tint);
+    /* Intentionally no visual difference from the default state — the
+       button should only light up on :hover, not sit pre-highlighted
+       just because it matches the previously saved language. */
   }
   .lang-modal-flag{
     display:inline-flex;
@@ -955,6 +958,11 @@
     opacity:0;
     pointer-events:none;
     transition:opacity .28s var(--ease);
+    /* Same reason as .lang-modal-backdrop: attached to <html>, so it
+       needs its own font/color instead of inheriting from body{}. */
+    font-family:var(--font-body);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
   }
   .contact-modal-backdrop.is-open{ opacity:1; pointer-events:auto; }
   .contact-modal{
