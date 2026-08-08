@@ -1045,3 +1045,98 @@
     .contact-modal{ transform:none !important; }
     .contact-modal-stagger{ opacity:1 !important; transform:none !important; }
   }
+  /* ============ EFFECTS PACK (added) ============ */
+
+  /* Accessibility: visible focus ring on every interactive element */
+  a:focus-visible, button:focus-visible, input:focus-visible, .btn:focus-visible{
+    outline:2px solid var(--primary);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* Scroll progress bar, fixed above the nav */
+  .scroll-progress{
+    position:fixed; top:0; left:0; right:0; height:3px; z-index:210;
+    pointer-events:none;
+  }
+  .scroll-progress-bar{
+    height:100%; width:0%;
+    background:linear-gradient(90deg, var(--primary), var(--purple));
+    box-shadow:0 0 14px rgba(47,111,237,0.55);
+    transition:width .08s linear;
+  }
+
+  /* Nav gains depth once the page is scrolled */
+  .nav{ transition:box-shadow .3s var(--ease), border-color .3s var(--ease); }
+  .nav.is-scrolled{
+    box-shadow:0 16px 34px -20px rgba(0,0,0,0.7);
+    border-bottom-color:var(--border-strong);
+  }
+
+  /* Back-to-top button */
+  .back-to-top{
+    position:fixed; right:22px; bottom:22px; z-index:120;
+    width:46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--surface-2);
+    border:1px solid var(--border-strong);
+    color:var(--text);
+    box-shadow:0 18px 36px -16px rgba(0,0,0,0.65);
+    opacity:0; visibility:hidden; transform:translateY(12px) scale(.9);
+    transition:opacity .25s var(--ease), transform .25s var(--ease), visibility .25s,
+               border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+  }
+  .back-to-top.is-visible{ opacity:1; visibility:visible; transform:translateY(0) scale(1); }
+  .back-to-top:hover{ border-color:var(--primary); background:var(--primary-tint); color:var(--primary-hover); }
+  .back-to-top svg{ width:18px; height:18px; }
+  @media (max-width:560px){ .back-to-top{ right:16px; bottom:16px; width:42px; height:42px; } }
+
+  /* Cursor-follow spotlight glow on cards and image panels */
+  .spot{ position:relative; }
+  .spot::before{
+    content:'';
+    position:absolute; inset:0; z-index:0;
+    border-radius:inherit;
+    background:radial-gradient(260px circle at var(--spot-x,50%) var(--spot-y,50%), rgba(47,111,237,0.16), transparent 72%);
+    opacity:0;
+    transition:opacity .35s var(--ease);
+    pointer-events:none;
+  }
+  .spot:hover::before{ opacity:1; }
+  .spot > *{ position:relative; z-index:1; }
+
+  /* Gentle zoom on filled photos when their frame is hovered */
+  .ph-filled .ph-img{ transition:transform .7s var(--ease); }
+  .ph-filled:hover .ph-img{ transform:scale(1.045); }
+
+  /* Primary button light sweep on hover */
+  .btn-primary{ position:relative; overflow:hidden; }
+  .btn-primary::after{
+    content:'';
+    position:absolute; top:0; left:-60%; width:40%; height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform:skewX(-20deg);
+    transition:left .55s var(--ease);
+    pointer-events:none;
+  }
+  .btn-primary:hover::after{ left:130%; }
+
+  /* Roadmap connector line + fill-on-hover node */
+  @media (min-width:861px){
+    .roadmap-track::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg, transparent, var(--border-strong) 8%, var(--border-strong) 92%, transparent);
+    }
+  }
+  .roadmap-item::before{ transition:width .45s var(--ease), background .3s var(--ease); }
+  .roadmap-item:hover::before{ width:100%; background:var(--primary); box-shadow:0 0 10px rgba(47,111,237,0.6); }
+
+  /* Animated stat counters */
+  .count-target{ font-variant-numeric:tabular-nums; }
+
+  /* Hero glow blobs respond to pointer position */
+  .glow-blob{ transition:transform .35s ease-out; }
+
+  /* Note: unlike the rest of the site, this effects pack intentionally
+     always animates — it does not gate on prefers-reduced-motion. */
