@@ -50,15 +50,19 @@
        (xanh/tím, cùng tông với glow-blob đang dùng ở hero) + 1 lớp lưới
        kẻ mảnh kiểu "tech grid". Sửa 1 lần ở đây vì mọi trang đều dùng
        chung file styles.css này. */
+    /* ============ AMBIENT PAGE BACKGROUND (áp dụng cho mọi trang) ============
+       1 file SVG duy nhất (assets/tech-bg.svg) gộp sẵn: lưới kẻ + glow
+       thương hiệu + 2 vòng "orbit" phát sáng + mạng lưới node-line kiểu
+       "tech network" — thay cho nền phẳng 1 màu trước đây. Dùng 1 lớp
+       thay vì nhiều lớp gradient rời để nhẹ và tương thích hơn. Vì SVG là
+       vector nên phóng theo background-size:cover vẫn nét ở mọi độ phân
+       giải. Sửa 1 lần ở đây vì mọi trang đều dùng chung file styles.css. */
     background-color:var(--bg);
-    background-image:
-      radial-gradient(680px 480px at 14% -8%, rgba(47,111,237,0.16), transparent 62%),
-      radial-gradient(620px 460px at 88% 6%, rgba(139,92,246,0.13), transparent 60%),
-      radial-gradient(760px 560px at 50% 100%, rgba(47,111,237,0.09), transparent 60%),
-      url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%3E%3Cpath%20d%3D%22M0%200H64M0%200V64%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke-width%3D%221%22/%3E%3C/svg%3E");
-    background-repeat:no-repeat, no-repeat, no-repeat, repeat;
-    background-size:auto, auto, auto, 64px 64px;
-    background-attachment:fixed, fixed, fixed, fixed;
+    background-image:url("../assets/tech-bg.svg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
     color:var(--text);
     font-family:var(--font-body);
     font-size:16px;
@@ -76,13 +80,9 @@
     padding:0 var(--space-3);
   }
 
-  /* background ambience */
-  body{
-    background-image:
-      radial-gradient(1100px 520px at 82% -10%, rgba(47,111,237,0.16), transparent 60%),
-      radial-gradient(900px 480px at -10% 15%, rgba(139,92,246,0.10), transparent 55%);
-    background-repeat:no-repeat;
-  }
+  /* background ambience — đã gộp vào rule body{} phía trên (dùng
+     assets/tech-bg.svg), không khai báo lại ở đây để tránh CSS cascade
+     ghi đè mất phần glow/mesh/grid đã thêm. */
 
   /* ============ NAV ============ */
   .nav{
