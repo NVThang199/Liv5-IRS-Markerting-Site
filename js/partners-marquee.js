@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SPEED_PX_PER_SEC = 34; // auto-scroll speed
 
   function initMarquee() {
@@ -23,8 +22,6 @@
     var rafId = null;
 
     function wrap(value) {
-      // Keep x within (-halfWidth, 0] so the loop never runs out of track
-      // in either scroll direction.
       while (value <= -halfWidth) value += halfWidth;
       while (value > 0) value -= halfWidth;
       return value;
@@ -42,7 +39,7 @@
         x = wrap(x - SPEED_PX_PER_SEC * dt);
         apply();
       } else {
-        lastTs = null; // reset delta baseline once dragging (or not scrolling) ends
+        lastTs = null;
       }
       rafId = requestAnimationFrame(frame);
     }
@@ -51,13 +48,6 @@
       if (rafId === null) rafId = requestAnimationFrame(frame);
     }
 
-    // Only loop-scroll once there are enough real partners that set A
-    // (one copy of the logos) alone would overflow the viewport. With just
-    // a couple of logos, halfWidth < viewport width — animating in that
-    // case just makes the row drift left with nothing to fill in behind
-    // it, which reads as "uneven / not centered". So instead we keep the
-    // track still and let CSS (.partners-marquee-viewport{justify-content:
-    // center}) center set A, and hide the duplicate set B entirely.
     function updateScrollingState() {
       var viewportWidth = viewport.clientWidth;
       var shouldScroll = halfWidth > viewportWidth;
@@ -69,8 +59,6 @@
       return shouldScroll;
     }
 
-    // Recompute halfWidth lazily in case images load after this runs and
-    // change the track's natural width (logos load async).
     function refreshHalfWidth() {
       var w = track.scrollWidth / 2;
       if (w > 0) halfWidth = w;
@@ -82,7 +70,7 @@
     window.addEventListener('resize', updateScrollingState);
 
     function onPointerDown(e) {
-      if (!viewport.classList.contains('is-scrolling')) return; // nothing to drag when centered/static
+      if (!viewport.classList.contains('is-scrolling')) return;
       dragging = true;
       viewport.classList.add('is-dragging');
       dragStartClientX = e.clientX;
@@ -107,15 +95,12 @@
     viewport.addEventListener('pointerup', onPointerUp);
     viewport.addEventListener('pointercancel', onPointerUp);
     viewport.addEventListener('pointerleave', function (e) {
-      // Only end the drag if the mouse button is no longer pressed —
-      // pointerleave alone (e.g. mouse briefly exits during a drag) should
-      // not cancel the drag while the button is still held down.
       if (dragging && e.buttons === 0) onPointerUp(e);
     });
 
     apply();
     var willScroll = updateScrollingState();
-    if (!prefersReducedMotion && willScroll) start();
+    if (willScroll) start();
   }
 
   document.addEventListener('DOMContentLoaded', initMarquee);

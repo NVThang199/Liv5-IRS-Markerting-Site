@@ -1,12 +1,8 @@
 (function () {
   'use strict';
 
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   /* ---------- Scroll reveal ---------- */
   function initScrollReveal() {
-    if (prefersReducedMotion) return;
-
     var targets = document.querySelectorAll('[data-reveal], [data-reveal-group]');
     if (!targets.length || !('IntersectionObserver' in window)) return;
 
@@ -115,8 +111,6 @@
 
   /* ---------- Page transition on internal nav clicks ---------- */
   function initPageTransition() {
-    // A plain opacity crossfade (no translate/parallax) is considered safe
-    // even under prefers-reduced-motion, so this stays enabled either way.
     var overlay = document.createElement('div');
     overlay.className = 'page-exit';
     document.body.appendChild(overlay);
@@ -167,9 +161,8 @@
       clear();
       document.body.removeEventListener('animationend', handler);
     });
-    // Fallback in case animationend never fires (e.g. some older mobile
-    // browsers under certain conditions) — the intro animation is .45s,
-    // so by 600ms it's always safe to clear.
+    // Fallback in case animationend never fires — the intro animation is
+    // .45s, so by 600ms it's always safe to clear.
     setTimeout(clear, 600);
   }
 

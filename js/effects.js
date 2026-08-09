@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasHover = !(window.matchMedia && window.matchMedia('(hover: none)').matches);
 
   /* ---------- Scroll progress bar + nav elevation ---------- */
@@ -65,9 +64,6 @@
     }
     document.addEventListener('scroll', update, { passive: true });
     btn.addEventListener('click', function () {
-      // Intentionally always smooth, even under prefers-reduced-motion:
-      // this is a deliberate, user-initiated single action (not looping/
-      // parallax motion), so we don't gate it behind that OS setting.
       scrollToTopSmooth(700);
     });
     update();
@@ -75,7 +71,7 @@
 
   /* ---------- Cursor-follow spotlight on cards & image frames ---------- */
   function initSpotlight() {
-    if (prefersReducedMotion || !hasHover) return;
+    if (!hasHover) return;
     var selector = [
       '.problem-card', '.segment-card', '.partner-card', '.team-card',
       '.roadmap-item', '.feat-visual .ph-filled', '.validation-visual .ph-filled',
@@ -122,7 +118,7 @@
     var targets = document.querySelectorAll('.count-target');
     if (!targets.length) return;
 
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window)) {
       targets.forEach(function (el) {
         el.textContent = (el.getAttribute('data-prefix') || '') + el.getAttribute('data-count');
       });
@@ -143,7 +139,7 @@
 
   /* ---------- Hero glow blobs drift toward the pointer ---------- */
   function initGlowParallax() {
-    if (prefersReducedMotion || !hasHover) return;
+    if (!hasHover) return;
     var hero = document.querySelector('.hero-visual');
     if (!hero || hero.dataset.parallaxBound) return;
     hero.dataset.parallaxBound = '1';

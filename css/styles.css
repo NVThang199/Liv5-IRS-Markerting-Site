@@ -537,11 +537,7 @@
     transition:transform .18s var(--ease);
   }
   .home-link-card:hover .home-link-arrow{ transform:translateX(4px); }
-  @media (prefers-reduced-motion: reduce){
-    .home-link-card, .home-link-arrow{ transition:none; }
-    .home-link-card:hover{ transform:none; }
-    .home-link-card:hover .home-link-arrow{ transform:none; }
-  }
+  
 
   /* ============ FEATURES ============ */
   .features{ padding:var(--space-7) 0; }
@@ -711,6 +707,118 @@
   .dot-mid{ background:#F59E0B; }
   .dot-no{ background:var(--text-faint); }
   .compare-note{ margin-top:16px; font-size:12.5px; color:var(--text-faint); }
+
+  /* ============ MARKET DASHBOARD (sourced stats) ============ */
+  .market-dashboard{ padding:var(--space-7) 0; border-top:1px solid var(--border); }
+  .dash-intro{
+    display:flex; gap:var(--space-3); align-items:flex-start;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-left:3px solid var(--purple);
+    border-radius:var(--radius-md);
+    padding:var(--space-3);
+    margin-bottom:var(--space-4);
+  }
+  .dash-intro-icon{
+    flex:0 0 auto; width:36px; height:36px; border-radius:50%;
+    background:var(--purple-tint); color:var(--purple);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .dash-intro-icon svg{ width:18px; height:18px; }
+  .dash-intro p{ font-size:14px; color:var(--text-muted); line-height:1.65; }
+
+  .stat-dash-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:var(--space-3);
+    margin-bottom:var(--space-4);
+  }
+  .stat-dash-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:var(--space-3);
+    display:flex; flex-direction:column;
+  }
+  .stat-dash-num{
+    font-family:var(--font-head); font-weight:700;
+    font-size:clamp(30px,3vw,40px); line-height:1;
+    color:var(--text); letter-spacing:-0.01em;
+  }
+  .stat-dash-label{
+    margin-top:8px; font-size:13.5px; color:var(--text-muted);
+    line-height:1.5; flex:1;
+  }
+  .stat-dash-source{
+    margin-top:12px; padding-top:10px;
+    border-top:1px dashed var(--border);
+    font-family:var(--font-mono); font-size:11px; color:var(--text-faint);
+  }
+  .stat-dash-source a{ color:var(--text-faint); text-decoration:underline; text-underline-offset:2px; }
+  .stat-dash-source a:hover{ color:var(--primary-hover); }
+
+  .market-bar-chart{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:var(--space-4);
+    margin-bottom:var(--space-3);
+  }
+  .market-bar-chart h4{
+    font-family:var(--font-body); font-size:15px; font-weight:600;
+    margin-bottom:var(--space-3);
+  }
+  .market-bar-row{
+    display:grid; grid-template-columns:200px 1fr 44px auto;
+    align-items:center; gap:12px;
+    margin-bottom:14px;
+  }
+  .market-bar-row:last-child{ margin-bottom:0; }
+  .market-bar-label{ font-size:13px; color:var(--text-muted); }
+  .market-bar-track{
+    background:var(--bg-elevated);
+    border-radius:999px; height:12px; overflow:hidden;
+  }
+  .market-bar-fill{
+    height:100%; border-radius:999px;
+    background:linear-gradient(90deg,var(--primary),var(--purple));
+  }
+  .market-bar-value{ font-family:var(--font-mono); font-size:13px; color:var(--text); text-align:right; }
+  .market-bar-source{ font-family:var(--font-mono); font-size:11px; color:var(--text-faint); }
+  .market-bar-source a{ color:var(--text-faint); text-decoration:underline; text-underline-offset:2px; }
+  .market-bar-source a:hover{ color:var(--primary-hover); }
+
+  .dash-refs{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:var(--space-3) var(--space-3);
+  }
+  .dash-refs h4{ font-family:var(--font-body); font-size:13px; font-weight:600; margin-bottom:10px; color:var(--text-muted); }
+  .dash-refs ol{ list-style:none; counter-reset:refnum; display:flex; flex-direction:column; gap:14px; }
+  .dash-refs li{ counter-increment:refnum; font-size:12.5px; color:var(--text-faint); line-height:1.55; padding-left:22px; position:relative; }
+  .dash-refs li::before{
+    content:"[" counter(refnum) "]"; position:absolute; left:0; top:0;
+    font-family:var(--font-mono); color:var(--text-faint);
+  }
+  .dash-refs li a{ color:var(--text-muted); text-decoration:underline; text-underline-offset:2px; }
+  .dash-refs li a:hover{ color:var(--primary-hover); }
+  .dash-refs .ref-title{ color:var(--text-faint); }
+  .dash-refs .ref-title strong{ color:var(--text-muted); font-weight:600; }
+  .dash-refs .ref-extract{
+    margin-top:4px; padding-left:12px;
+    border-left:2px solid var(--border-strong);
+    color:var(--text-muted);
+  }
+  .dash-refs .ref-extract strong{ color:var(--text); font-weight:600; }
+
+  @media (max-width:960px){
+    .stat-dash-grid{ grid-template-columns:repeat(2,1fr); }
+    .market-bar-row{ grid-template-columns:120px 1fr 36px; }
+    .market-bar-source{ display:none; }
+  }
+  @media (max-width:560px){
+    .stat-dash-grid{ grid-template-columns:1fr; }
+  }
 
   /* ============ VALIDATION ============ */
   .validation{ padding:var(--space-7) 0; border-top:1px solid var(--border); }
@@ -1060,24 +1168,7 @@
   .btn:active{ transform:translateY(0); }
 
   /* Respect reduced-motion preference: disable non-essential motion */
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    /* Keep a plain opacity fade (no translateY) — this is considered safe
-       under reduced-motion since it has no parallax/vestibular trigger. */
-    body{ animation:page-in-fade-only .3s linear both; }
-    [data-reveal], [data-reveal-group] > *{
-      opacity:1 !important;
-      transform:none !important;
-      transition:none !important;
-    }
-    .problem-card, .segment-card, .partner-card, .team-card, .roadmap-item, .btn{
-      transition:none !important;
-    }
-    .problem-card:hover, .segment-card:hover, .partner-card:hover, .team-card:hover, .roadmap-item:hover, .btn:hover{
-      transform:none !important;
-    }
-    /* .page-exit intentionally stays active — a plain crossfade, not disabled */
-  }
+  
   @keyframes page-in-fade-only{
     from{ opacity:0; }
     to{ opacity:1; }
@@ -1174,10 +1265,7 @@
   }
   .lang-modal-dontshow:hover{ color:var(--text); }
 
-  @media (prefers-reduced-motion: reduce){
-    .lang-modal-backdrop, .lang-modal, .lang-modal-btn{ transition:none !important; }
-    .lang-modal{ transform:none !important; }
-  }
+  
 
   /* ============ CONTACT MODAL ============ */
   .contact-modal-backdrop{
@@ -1288,11 +1376,7 @@
     transform:translateY(0);
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .contact-modal-backdrop, .contact-modal, .contact-modal-stagger{ transition:none !important; }
-    .contact-modal{ transform:none !important; }
-    .contact-modal-stagger{ opacity:1 !important; transform:none !important; }
-  }
+  
   /* ============ EFFECTS PACK (added) ============ */
 
   /* Accessibility: visible focus ring on every interactive element */
@@ -1352,6 +1436,11 @@
   }
   .spot:hover::before{ opacity:1; }
   .spot > *{ position:relative; z-index:1; }
+  /* .ph-badge must stay position:absolute (it's meant to float over the
+     image) — without this override, the equal-specificity ".spot > *"
+     rule above wins by cascade order and turns it into a flex item,
+     squeezing/wrapping the badge text next to the image. */
+  .spot > .ph-badge{ position:absolute; z-index:1; }
 
   /* Gentle zoom on filled photos when their frame is hovered */
   .ph-filled .ph-img{ transition:transform .7s var(--ease); }
