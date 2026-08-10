@@ -30,16 +30,24 @@
           <div class="glow-blob glow-purple"></div>
           <div class="hero-vba">
             <div class="hero-vba-head">
-              <div class="hero-vba-title"><span class="led"></span><span data-vi="VBA — Số trận đã thi đấu" data-en="VBA — Games played">VBA — Số trận đã thi đấu</span></div>
-              <div class="hero-vba-season">Regular Season 2026</div>
+              <div class="hero-vba-title"><span class="led"></span><span data-vi="IRS tại Việt Nam — luật đến trước, triển khai đến sau" data-en="IRS in Vietnam — the rule came first, rollout came later">IRS tại Việt Nam — luật đến trước, triển khai đến sau</span></div>
+              <div class="hero-vba-season" data-vi="2020 → nay" data-en="2020 → now">2020 → nay</div>
             </div>
-            <p class="hero-vba-caption" data-vi="Số trận (G) mỗi cầu thủ đã thi đấu tại VBA mùa 2026 — trích từ bảng thống kê Averages của giải." data-en="Games played (G) by each player in the VBA 2026 season — from the league's Averages statistics table.">Số trận (G) mỗi cầu thủ đã thi đấu tại VBA mùa 2026 — trích từ bảng thống kê Averages của giải.</p>
-            <div class="hero-vba-chart-wrap">
-              <canvas id="vba-games-chart" aria-label="Biểu đồ số trận đã thi đấu của cầu thủ VBA mùa 2026" role="img"></canvas>
+            <p class="hero-vba-caption" data-vi="VBA ban hành quy định cho phép dùng Instant Replay System (IRS) từ 01/10/2020. Phải nhiều năm sau, đơn vị cung cấp thiết bị Minh Khang Center mới công khai xác nhận đã mang IRS đến VBA — và đang mở rộng ra nhiều giải đấu khác." data-en="VBA's rule permitting Instant Replay System (IRS) use dates back to 01/10/2020. It took years before equipment provider Minh Khang Center publicly confirmed bringing IRS to VBA — and is now expanding to other tournaments.">VBA ban hành quy định cho phép dùng Instant Replay System (IRS) từ 01/10/2020. Phải nhiều năm sau, đơn vị cung cấp thiết bị Minh Khang Center mới công khai xác nhận đã mang IRS đến VBA — và đang mở rộng ra nhiều giải đấu khác.</p>
+            <div class="hero-vba-chart-wrap hero-vba-chart-donut">
+              <canvas id="irs-gap-chart" aria-label="Biểu đồ tròn: quy định IRS của VBA có từ năm 2020; theo Minh Khang Center, hệ thống IRS đã được đưa vào VBA và đang mở rộng ra các giải đấu khác, phần lớn giải đấu trong nước vẫn chưa có" role="img"></canvas>
+              <div class="hero-donut-center">
+                <div class="hero-donut-center-num">1/7</div>
+                <div class="hero-donut-center-label" data-vi="giải có nguồn xác nhận triển khai IRS" data-en="tournament with IRS deployment confirmed">giải có nguồn xác nhận triển khai IRS</div>
+              </div>
+            </div>
+            <div class="hero-vba-legend">
+              <span class="hero-vba-legend-item"><span class="dot dot-has"></span><span data-vi="VBA — có quy định IRS từ 2020, Minh Khang Center xác nhận đã triển khai" data-en="VBA — IRS rule since 2020, deployment confirmed by Minh Khang Center">VBA — có quy định IRS từ 2020, Minh Khang Center xác nhận đã triển khai</span></span>
+              <span class="hero-vba-legend-item"><span class="dot dot-none"></span><span data-vi="Phần lớn giải đấu trong nước — chưa ghi nhận có IRS" data-en="Most domestic tournaments — no IRS confirmed yet">Phần lớn giải đấu trong nước — chưa ghi nhận có IRS</span></span>
             </div>
             <div class="hero-vba-source">
-              <span data-vi="Số liệu thật, trích từ bảng thống kê VBA" data-en="Real data, from VBA's statistics table">Số liệu thật, trích từ bảng thống kê VBA</span>
-              <a href="https://vba.vn/statistics" target="_blank" rel="noopener">vba.vn/statistics →</a>
+              <span data-vi="Quy định IRS của VBA (2020); Minh Khang Center xác nhận đưa IRS tới VBA và mở rộng ra các giải khác" data-en="VBA's IRS rule (2020); Minh Khang Center confirms bringing IRS to VBA and expanding to other tournaments">Quy định IRS của VBA (2020); Minh Khang Center xác nhận đưa IRS tới VBA và mở rộng ra các giải khác</span>
+              <a href="https://www.facebook.com/minhkhangcentervn/posts/1336283778610641/" target="_blank" rel="noopener">Minh Khang Center →</a>
             </div>
           </div>
         </div>
@@ -333,78 +341,61 @@
   <script src="js/motion.js?v=20260809v1"></script>
   <script src="js/effects.js?v=20260809v1"></script>
 
-  <!-- ============ VBA GAMES-PLAYED CHART ============
-       Dữ liệu G (số trận đã đấu) lấy nguyên văn từ bảng "Averages" trên
-       vba.vn/statistics, mùa Regular Season 2026. Sắp xếp giảm dần theo
-       số trận, tên cầu thủ ghi đầy đủ (không viết tắt). -->
+  <!-- ============ IRS ADOPTION DONUT CHART ============
+       VBA ban hành quy định cho phép dùng Instant Replay System (IRS) từ
+       01/10/2020 (nguồn: thông báo chính thức trên vba.vn). Minh Khang
+       Center — đơn vị cung cấp thiết bị — công khai xác nhận (bài đăng
+       Facebook) đã đưa IRS vào VBA và đang mở rộng sang các giải đấu
+       khác. Đây là nguồn công khai duy nhất xác nhận một giải cụ thể đã
+       triển khai IRS trên thực tế tại Việt Nam tính đến hiện tại.
+       Tỷ lệ 1/7 dùng đúng con số 7 giải đấu đã ghi nhận nửa đầu 2026
+       (xem mục "Số liệu thị trường" phía trên, có nguồn báo chí riêng).
+       Phần "chưa ghi nhận" dùng đúng nghĩa "chưa có nguồn xác nhận",
+       KHÔNG khẳng định các giải đó chắc chắn không có IRS. -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script>
     (function(){
-      var vbaGamesData = [
-        { name: "Alan Cleveland, Jackson JR", team: "Hanoi Buffaloes", games: 16 },
-        { name: "Dakota Anthony, Zinser", team: "Ho Chi Minh City Wings", games: 16 },
-        { name: "Du Minh, An", team: "Ho Chi Minh City Wings", games: 16 },
-        { name: "Huynh Thanh, Tam", team: "Cantho Catfish", games: 16 },
-        { name: "Mohammed Mayali, Jamal", team: "Saigon Heat", games: 16 },
-        { name: "Nasanbat, Munkhchudur", team: "Nha Trang Dolphins", games: 16 },
-        { name: "Raley Ross, Brandis", team: "Saigon Heat", games: 16 },
-        { name: "Tykhonov, Dmytro", team: "Ho Chi Minh City Wings", games: 16 },
-        { name: "Bordeos Opeña Jr., Albert", team: "Cantho Catfish", games: 12 },
-        { name: "Bramah, Adonnecy Joshua", team: "Hanoi Buffaloes", games: 14 }
-      ].sort(function(a, b){ return b.games - a.games; });
+      var irsData = [
+        { label: "VBA — Minh Khang Center xác nhận đã triển khai IRS", value: 1 },
+        { label: "Các giải còn lại — chưa ghi nhận nguồn xác nhận IRS", value: 6 }
+      ];
 
-      function initVbaChart(){
-        var canvas = document.getElementById('vba-games-chart');
+      function initIrsGapChart(){
+        var canvas = document.getElementById('irs-gap-chart');
         if(!canvas || typeof Chart === 'undefined') return;
         if(canvas.dataset.rendered === '1') return;
         canvas.dataset.rendered = '1';
 
         var styles = getComputedStyle(document.documentElement);
         var primary = styles.getPropertyValue('--primary').trim() || '#2F6FED';
-        var primaryHover = styles.getPropertyValue('--primary-hover').trim() || '#4C82F5';
-        var textColor = styles.getPropertyValue('--text').trim() || '#F5F7FB';
-        var textMuted = styles.getPropertyValue('--text-muted').trim() || '#97A1B8';
-        var borderColor = styles.getPropertyValue('--border').trim() || '#1E2740';
+        var borderColor = styles.getPropertyValue('--bg-elevated').trim() || '#0B1020';
+        var trackColor = 'rgba(255,255,255,0.09)';
 
         new Chart(canvas.getContext('2d'), {
-          type: 'bar',
+          type: 'doughnut',
           data: {
-            labels: vbaGamesData.map(function(d){ return d.name; }),
+            labels: irsData.map(function(d){ return d.label; }),
             datasets: [{
-              label: 'Số trận đã đấu (G)',
-              data: vbaGamesData.map(function(d){ return d.games; }),
-              backgroundColor: primary,
-              hoverBackgroundColor: primaryHover,
-              borderRadius: 4,
-              maxBarThickness: 22
+              data: irsData.map(function(d){ return d.value; }),
+              backgroundColor: [primary, trackColor],
+              borderColor: borderColor,
+              borderWidth: 3,
+              hoverOffset: 4
             }]
           },
           options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
+            cutout: '72%',
             plugins: {
               legend: { display: false },
               tooltip: {
                 callbacks: {
-                  title: function(items){ return vbaGamesData[items[0].dataIndex].name; },
                   label: function(item){
-                    var d = vbaGamesData[item.dataIndex];
-                    return d.team + ' — ' + d.games + ' trận';
+                    var d = irsData[item.dataIndex];
+                    return d.label + ': ' + d.value + '/7 giải';
                   }
                 }
-              }
-            },
-            scales: {
-              x: {
-                beginAtZero: true,
-                max: 18,
-                ticks: { color: textMuted, stepSize: 4, font: { size: 10.5 } },
-                grid: { color: borderColor }
-              },
-              y: {
-                ticks: { color: textColor, font: { size: 11 } },
-                grid: { display: false }
               }
             }
           }
@@ -412,14 +403,14 @@
       }
 
       if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', initVbaChart);
+        document.addEventListener('DOMContentLoaded', initIrsGapChart);
       } else {
-        initVbaChart();
+        initIrsGapChart();
       }
       // include.js chèn nav/footer bất đồng bộ; canvas nằm ngoài phần đó
       // nên chỉ cần đảm bảo Chart.js đã load — thử lại 1 lần sau 300ms
       // phòng trường hợp script CDN chưa kịp sẵn sàng.
-      setTimeout(initVbaChart, 300);
+      setTimeout(initIrsGapChart, 300);
     })();
   </script>
 </body>
